@@ -49,7 +49,7 @@ importers:
         specifier: ~5.4.0
         version: 5.4.5
       vite:
-        specifier: ^5.2.8
+        specifier: ^5.4.6
         version: 5.4.6(@types/node@20.16.5)(less@4.2.0)
       vite-plugin-compression:
         specifier: ^0.5.1
