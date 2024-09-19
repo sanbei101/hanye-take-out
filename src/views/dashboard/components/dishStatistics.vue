@@ -18,7 +18,7 @@
             </el-icon>
             已启售
           </span>
-          <span class="num">{{ dishesData.sold }}</span>
+          <span class="num">{{ props.dishesData.sold }}</span>
         </li>
         <li>
           <span class="status">
@@ -27,7 +27,7 @@
             </el-icon>
             已停售
           </span>
-          <span class="num">{{ dishesData.discontinued }}</span>
+          <span class="num">{{ props.dishesData.discontinued }}</span>
         </li>
         <li class="add">
           <router-link to="/dish/add">

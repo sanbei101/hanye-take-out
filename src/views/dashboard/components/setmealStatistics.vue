@@ -18,16 +18,16 @@
             </el-icon>
             已启售
           </span>
-          <span class="num">{{ setMealData.sold }}</span>
+          <span class="num">{{ props.setMealData.sold }}</span>
         </li>
         <li>
-          <span class="status"> 
+          <span class="status">
             <el-icon>
               <Lock />
             </el-icon>
             已停售
           </span>
-          <span class="num">{{ setMealData.discontinued }}</span>
+          <span class="num">{{ props.setMealData.discontinued }}</span>
         </li>
         <li class="add">
           <router-link to="setmeal/add">

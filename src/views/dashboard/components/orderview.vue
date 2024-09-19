@@ -19,7 +19,7 @@
             待接单
           </span>
           <span class="num tip">
-            <router-link to="/order?status=2">{{ orderviewData.waitingOrders }}</router-link>
+            <router-link to="/order?status=2">{{ props.orderviewData.waitingOrders }}</router-link>
           </span>
         </li>
         <li>
@@ -30,7 +30,7 @@
             待派送
           </span>
           <span class="num tip">
-            <router-link to="/order?status=3">{{ orderviewData.deliveredOrders }}</router-link>
+            <router-link to="/order?status=3">{{ props.orderviewData.deliveredOrders }}</router-link>
           </span>
         </li>
         <li>
@@ -41,7 +41,7 @@
             已完成
           </span>
           <span class="num">
-            <router-link to="/order?status=5">{{ orderviewData.completedOrders }}</router-link>
+            <router-link to="/order?status=5">{{ props.orderviewData.completedOrders }}</router-link>
           </span>
         </li>
         <li>
@@ -52,7 +52,7 @@
             已取消
           </span>
           <span class="num">
-            <router-link to="/order?status=6">{{ orderviewData.cancelledOrders }}</router-link>
+            <router-link to="/order?status=6">{{ props.orderviewData.cancelledOrders }}</router-link>
           </span>
         </li>
         <li>
@@ -63,7 +63,7 @@
             全部订单
           </span>
           <span class="num">
-            <router-link to="/order">{{ orderviewData.allOrders }}</router-link>
+            <router-link to="/order">{{ props.orderviewData.allOrders }}</router-link>
           </span>
         </li>
       </ul>
@@ -90,5 +90,4 @@ const props = defineProps<{
 const days = computed(() => getday())
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

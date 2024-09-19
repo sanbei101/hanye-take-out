@@ -33,7 +33,7 @@ const inputRef1 = ref<HTMLInputElement | null>(null)
 const updateRef = ref()
 
 // 表单校验
-const checkAge = (rule: any, value: string, callback: (error?: Error) => void) => {
+const checkAge = (_rule: any, value: string, callback: (error?: Error) => void) => {
   if (value === '' || value === undefined) {
     callback(new Error('请输入年龄'));
   } else if (!/^\d+$/.test(value)) {

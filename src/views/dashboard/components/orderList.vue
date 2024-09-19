@@ -54,7 +54,7 @@
             <el-table-column prop="tablewareNumber" label="餐具数量" min-width="80" align="center" v-if="status === 3">
               <template #default="scope">
                 {{ scope.row.tablewareNumber === -1 ? '无需餐具' : scope.row.tablewareNumber === 0 ? '按餐量提供' :
-                  scope.row.tablewareNumber }}
+            scope.row.tablewareNumber }}
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center"
@@ -106,9 +106,9 @@
             <div style="display: inline-block" class="order-status"
               :class="{ status3: [3, 4].includes(dialogOrderStatus) }">
               {{
-                orderList.filter((item) => item.value === dialogOrderStatus)[0]
-                  .label
-              }}
+            orderList.filter((item) => item.value === dialogOrderStatus)[0]
+              .label
+          }}
             </div>
           </div>
           <p><label>下单时间：</label>{{ diaForm!.orderTime }}</p>
@@ -137,10 +137,10 @@
             <div class="user-remark" :class="{ orderCancel: dialogOrderStatus === 6 }">
               <div>{{ dialogOrderStatus === 6 ? '取消原因' : '备注' }}</div>
               <span>{{
-                dialogOrderStatus === 6
-                  ? diaForm!.cancelReason || diaForm!.rejectionReason
-                  : diaForm!.remark
-              }}</span>
+            dialogOrderStatus === 6
+              ? diaForm!.cancelReason || diaForm!.rejectionReason
+              : diaForm!.remark
+          }}</span>
             </div>
           </div>
 
@@ -167,7 +167,7 @@
               <div class="dish-amount">
                 <span class="amount-name">菜品小计：</span>
                 <span class="amount-price">￥{{ (((diaForm!.amount - 6 - diaForm!.packAmount)
-                  * 100) / 100).toFixed(2) }}</span>
+            * 100) / 100).toFixed(2) }}</span>
               </div>
               <div class="send-amount">
                 <span class="amount-name">派送费：</span>
@@ -210,8 +210,8 @@
         <el-form-item :label="cancelDialogTitle + '原因：'">
           <el-select v-model="cancelReason" :placeholder="'请选择' + cancelDialogTitle + '原因'">
             <el-option v-for="(item, index) in cancelDialogTitle === '取消'
-              ? cancelrReasonList
-              : rejectReasonList" :key="index" :label="item.label" :value="item.label" />
+            ? cancelrReasonList
+            : rejectReasonList" :key="index" :label="item.label" :value="item.label" />
           </el-select>
         </el-form-item>
         <el-form-item v-if="cancelReason === '自定义原因'" label="原因：">
@@ -231,7 +231,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
 import Empty from '@/components/Empty.vue';
 import {
   getOrderDetailPageAPI,
@@ -245,7 +244,6 @@ import {
 import type { Order, OrderVO } from '@/types/order'
 import { ElMessage } from 'element-plus'
 
-const router = useRouter()
 
 const orderStatics = ref<any>(''); // 订单统计数据
 const orderId = ref<string>(''); // 订单号
@@ -459,6 +457,7 @@ onMounted(() => {
       margin: 2px;
     }
   }
+
   .before,
   .middle,
   .after {

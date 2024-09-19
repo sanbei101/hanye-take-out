@@ -429,7 +429,7 @@ onMounted(async () => {
     </div>
 
     <!-- 查看dialog弹框部分 -->
-    <el-dialog title="订单信息" v-model="dialogVisible" width="53%" :before-close="handleClose" class="order-dialog">
+    <el-dialog title="订单信 息" v-model="dialogVisible" width="53%" :before-close="handleClose" class="order-dialog">
       <el-scrollbar style="height: 100%">
         <div class="order-top">
           <div>
