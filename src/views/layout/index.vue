@@ -1,11 +1,12 @@
 <script setup lang="ts" name="layout">
 import { RouterView, useRouter, useRoute } from 'vue-router'
-import { ElMessageBox, ElMessage } from 'element-plus'
+import { ElMessageBox, ElMessage, ElDialog, ElRadioGroup, ElRadio, ElButton, ElForm, ElFormItem, ElInput } from 'element-plus'
+import { ElContainer, ElHeader, ElIcon, ElDropdown, ElDropdownItem, ElDropdownMenu, ElMenuItem, ElMenu, ElMain, ElFooter } from 'element-plus'
+import { ElNotification } from 'element-plus'
 import { useUserInfoStore } from '@/store'
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { fixPwdAPI } from '@/api/employee'
 import { getStatusAPI, fixStatusAPI } from '@/api/shop'
-import { ElNotification } from 'element-plus'
 
 // ------ data ------
 const dialogFormVisible = ref(false)
@@ -61,7 +62,7 @@ const status = ref(1)
 const status_active = ref(1) // 单选框绑定的动态值
 
 // 自定义校验规则: 两次密码是否一致
-const samePwd = (rules: any, value: any, callback: any) => {
+const samePwd = (_rules: any, value: any, callback: any) => {
   if (value !== form.newPwd) {
     // 如果验证失败，则调用 回调函数时，指定一个 Error 对象。
     callback(new Error('两次输入的密码不一致!'))
