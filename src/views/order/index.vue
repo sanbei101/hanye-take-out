@@ -414,21 +414,14 @@ onMounted(async () => {
         key="estimatedDeliveryTime"
         prop="estimatedDeliveryTime"
         label="预计送达时间"
-        min-width="110"
-        align="center" />
-      <el-table-column v-if="[0, 2, 5].includes(orderStatus)" key="amount" prop="amount" label="实收金额" align="center">
+        min-width="110" />
+      <el-table-column v-if="[0, 2, 5].includes(orderStatus)" key="amount" prop="amount" label="实收金额">
         <template v-slot="{ row }">
           <span>￥{{ (row.amount.toFixed(2) * 100) / 100 }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="[2, 3, 4, 5].includes(orderStatus)" key="remark" prop="remark" label="备注" align="center" />
-      <el-table-column
-        v-if="[2, 3, 4].includes(orderStatus)"
-        key="tablewareNumber"
-        prop="tablewareNumber"
-        label="餐具数量"
-        align="center"
-        min-width="80">
+      <el-table-column v-if="[2, 3, 4, 5].includes(orderStatus)" key="remark" prop="remark" label="备注" />
+      <el-table-column v-if="[2, 3, 4].includes(orderStatus)" key="tablewareNumber" prop="tablewareNumber" label="餐具数量" min-width="80">
         <template #default="scope">
           {{ scope.row.tablewareNumber === -1 ? '无需餐具' : scope.row.tablewareNumber === 0 ? '按餐量提供' : scope.row.tablewareNumber }}
         </template>
@@ -436,7 +429,6 @@ onMounted(async () => {
       <el-table-column
         prop="btn"
         label="操作"
-        align="center"
         width="190px"
         :class-name="orderStatus === 0 ? 'operate' : 'otherOperate'"
         :min-width="[2, 3, 4].includes(orderStatus) ? 130 : [0].includes(orderStatus) ? 140 : 'auto'">
