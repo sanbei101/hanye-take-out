@@ -1,30 +1,32 @@
-<script setup lang="ts" name:="my-register">
+<script setup lang="ts">
 // 导出是命名导出，所以这里导入要加{}
-import { registerAPI } from '@/api/employee'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { registerAPI } from '@/api/employee';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { ElMessage } from 'element-plus';
 
-const form = ref({ // 表单的数据对象
+const form = ref({
+  // 表单的数据对象
   account: '', // 用户名
   password: '', // 密码
   repassword: '' // 确认密码
-})
+});
 // 表单校验的ref
-const registerRef = ref()
+const registerRef = ref();
 
 // 自定义校验规则: 两次密码是否一致
 // 注意：必须在data函数里定义此箭头函数，才能确保this.from能使用，从而获取到password的值
 const samePwd = (_rules: any, value: any, callback: any) => {
   if (value !== form.value.password) {
     // 如果验证失败，则调用 回调函数时，指定一个 Error 对象。
-    callback(new Error('两次输入的密码不一致!'))
+    callback(new Error('两次输入的密码不一致!'));
   } else {
     // 如果验证成功，则直接调用 callback 回调函数即可。
-    callback()
+    callback();
   }
-}
-const rules = { // 表单的规则检验对象
+};
+const rules = {
+  // 表单的规则检验对象
   account: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
     {
@@ -46,33 +48,33 @@ const rules = { // 表单的规则检验对象
     { pattern: /^\S{6,15}$/, message: '密码必须是6-15的非空字符', trigger: 'blur' },
     { validator: samePwd, trigger: 'blur' }
   ]
-}
+};
 
-const router = useRouter()
+const router = useRouter();
 
 const registerFn = async () => {
   // 先校验输入格式是否合法
-  const valid = await registerRef.value.validate()
+  const valid = await registerRef.value.validate();
   if (valid) {
     // 通过校验，拿到绑定的数据
-    console.log('注册的表单ref:  ', registerRef)
-    console.log('form.value:  ', form.value)
+    console.log('注册的表单ref:  ', registerRef);
+    console.log('form.value:  ', form.value);
     // 1.调用注册接口，通过接口的return request，拿到promise对象
-    const { data: res } = await registerAPI(form.value)
-    console.log(res)
+    const { data: res } = await registerAPI(form.value);
+    console.log(res);
     // 2.注册失败，响应拦截器已经ElMessage提示用户，这里直接返回
     if (res.code !== 0) {
-      console.log('注册失败！')
-      return false
+      console.log('注册失败！');
+      return false;
     }
     // 3.注册成功，提示用户
-    ElMessage.success('注册成功!')
+    ElMessage.success('注册成功!');
     // 4.路由跳转到登录页面
-    router.push('/login')
+    router.push('/login');
   } else {
-    return false // 阻止默认提交行为（表单下面红色提示）
+    return false; // 阻止默认提交行为（表单下面红色提示）
   }
-}
+};
 </script>
 
 <template>
@@ -80,58 +82,58 @@ const registerFn = async () => {
   <div class="background">
     <!-- 下雨效果 -->
     <div class="rain">
-      <span style="--i:64;"></span>
-      <span style="--i:33;"></span>
-      <span style="--i:21;"></span>
-      <span style="--i:95;"></span>
-      <span style="--i:42;"></span>
-      <span style="--i:17;"></span>
-      <span style="--i:88;"></span>
-      <span style="--i:50;"></span>
-      <span style="--i:10;"></span>
-      <span style="--i:77;"></span>
-      <span style="--i:3;"></span>
-      <span style="--i:29;"></span>
-      <span style="--i:72;"></span>
-      <span style="--i:5;"></span>
-      <span style="--i:90;"></span>
-      <span style="--i:49;"></span>
-      <span style="--i:14;"></span>
-      <span style="--i:61;"></span>
-      <span style="--i:38;"></span>
-      <span style="--i:81;"></span>
-      <span style="--i:64;"></span>
-      <span style="--i:33;"></span>
-      <span style="--i:21;"></span>
-      <span style="--i:95;"></span>
-      <span style="--i:42;"></span>
-      <span style="--i:17;"></span>
-      <span style="--i:88;"></span>
-      <span style="--i:50;"></span>
-      <span style="--i:10;"></span>
-      <span style="--i:77;"></span>
-      <span style="--i:3;"></span>
-      <span style="--i:29;"></span>
-      <span style="--i:72;"></span>
-      <span style="--i:5;"></span>
-      <span style="--i:90;"></span>
-      <span style="--i:49;"></span>
-      <span style="--i:14;"></span>
-      <span style="--i:61;"></span>
-      <span style="--i:38;"></span>
-      <span style="--i:81;"></span>
-      <span style="--i:21;"></span>
-      <span style="--i:95;"></span>
-      <span style="--i:42;"></span>
-      <span style="--i:17;"></span>
-      <span style="--i:88;"></span>
-      <span style="--i:50;"></span>
-      <span style="--i:10;"></span>
-      <span style="--i:77;"></span>
-      <span style="--i:3;"></span>
-      <span style="--i:29;"></span>
-      <span style="--i:14;"></span>
-      <span style="--i:61;"></span>
+      <span style="--i: 64"></span>
+      <span style="--i: 33"></span>
+      <span style="--i: 21"></span>
+      <span style="--i: 95"></span>
+      <span style="--i: 42"></span>
+      <span style="--i: 17"></span>
+      <span style="--i: 88"></span>
+      <span style="--i: 50"></span>
+      <span style="--i: 10"></span>
+      <span style="--i: 77"></span>
+      <span style="--i: 3"></span>
+      <span style="--i: 29"></span>
+      <span style="--i: 72"></span>
+      <span style="--i: 5"></span>
+      <span style="--i: 90"></span>
+      <span style="--i: 49"></span>
+      <span style="--i: 14"></span>
+      <span style="--i: 61"></span>
+      <span style="--i: 38"></span>
+      <span style="--i: 81"></span>
+      <span style="--i: 64"></span>
+      <span style="--i: 33"></span>
+      <span style="--i: 21"></span>
+      <span style="--i: 95"></span>
+      <span style="--i: 42"></span>
+      <span style="--i: 17"></span>
+      <span style="--i: 88"></span>
+      <span style="--i: 50"></span>
+      <span style="--i: 10"></span>
+      <span style="--i: 77"></span>
+      <span style="--i: 3"></span>
+      <span style="--i: 29"></span>
+      <span style="--i: 72"></span>
+      <span style="--i: 5"></span>
+      <span style="--i: 90"></span>
+      <span style="--i: 49"></span>
+      <span style="--i: 14"></span>
+      <span style="--i: 61"></span>
+      <span style="--i: 38"></span>
+      <span style="--i: 81"></span>
+      <span style="--i: 21"></span>
+      <span style="--i: 95"></span>
+      <span style="--i: 42"></span>
+      <span style="--i: 17"></span>
+      <span style="--i: 88"></span>
+      <span style="--i: 50"></span>
+      <span style="--i: 10"></span>
+      <span style="--i: 77"></span>
+      <span style="--i: 3"></span>
+      <span style="--i: 29"></span>
+      <span style="--i: 14"></span>
+      <span style="--i: 61"></span>
     </div>
     <!-- 注册的盒子 -->
     <div class="reg-box">
@@ -178,7 +180,7 @@ body {
 }
 
 .background::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -202,11 +204,10 @@ body {
   background-color: #eee;
   margin: 0 4px;
   border-radius: 50%;
-  box-shadow: 0 0 10px 5px rgba(238, 238, 238, 0.5),
-    /* 微调颜色和透明度 */
-    0 0 30px 15px rgba(238, 238, 238, 0.3),
-    /* 模糊半径和扩散范围 */
-    0 0 50px 30px rgba(221, 221, 221, 0.2);
+  box-shadow:
+    0 0 10px 5px rgba(238, 238, 238, 0.5),
+    /* 微调颜色和透明度 */ 0 0 30px 15px rgba(238, 238, 238, 0.3),
+    /* 模糊半径和扩散范围 */ 0 0 50px 30px rgba(221, 221, 221, 0.2);
   animation: animate 15s linear infinite;
   animation-duration: calc(200s / var(--i));
 }
@@ -214,12 +215,11 @@ body {
 .rain span:nth-child(even) {
   background: #ff8800;
   /* 橙色调 */
-  box-shadow: 0 0 10px 5px rgba(255, 150, 50, 0.5),
-    /* 颜色和透明度 */
-    0 0 30px 15px rgba(200, 100, 50, 0.3),
+  box-shadow:
+    0 0 10px 5px rgba(255, 150, 50, 0.5),
+    /* 颜色和透明度 */ 0 0 30px 15px rgba(200, 100, 50, 0.3),
     0 0 50px 30px rgba(200, 50, 50, 0.1);
 }
-
 
 @keyframes animate {
   0% {
