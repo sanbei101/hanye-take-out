@@ -15,7 +15,7 @@ const form = ref({
 const registerRef = ref();
 
 // 自定义校验规则: 两次密码是否一致
-// 注意：必须在data函数里定义此箭头函数，才能确保this.from能使用，从而获取到password的值
+// 注意:必须在data函数里定义此箭头函数，才能确保this.from能使用，从而获取到password的值
 const samePwd = (_rules: any, value: any, callback: any) => {
   if (value !== form.value.password) {
     // 如果验证失败，则调用 回调函数时，指定一个 Error 对象。

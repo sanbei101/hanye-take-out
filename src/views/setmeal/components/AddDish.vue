@@ -65,7 +65,7 @@ onMounted(() => {
 // 监视搜索框，一变化就根据新的值模糊查询菜品
 // searchKey 是父组件的搜索值，因此使用箭头函数表示指向父级的this
 watch(() => props.searchKey, (value) => {
-  console.log('子组件adddish watch监视到 搜索框输入的值发生变化，新值为： ', value)
+  console.log('子组件adddish watch监视到 搜索框输入的值发生变化，新值为: ', value)
   if (value.trim()) {
     getDishForName(value)
   }

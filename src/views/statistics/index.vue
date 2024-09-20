@@ -92,7 +92,7 @@ const getTurnoverStatisticsData = async (begin: string, end: string) => {
     dateList: data.data.dateList.split(','),
     turnoverList: data.data.turnoverList.split(',')
   }
-  console.log('获取到营业额统计数据：', turnoverData.value)
+  console.log('获取到营业额统计数据:', turnoverData.value)
 }
 
 // chart2 用户统计
@@ -103,7 +103,7 @@ const getUserStatisticsData = async (begin: string, end: string) => {
     totalUserList: res.data.totalUserList.split(','),
     newUserList: res.data.newUserList.split(','),
   }
-  console.log('获取到用户统计数据：', userData.value)
+  console.log('获取到用户统计数据:', userData.value)
 }
 
 // chart3 订单统计
@@ -119,7 +119,7 @@ const getOrderStatisticsData = async (begin: string, end: string) => {
     validOrderCount: res.data.validOrderCount,
     orderCompletionRate: res.data.orderCompletionRate
   }
-  console.log('获取到订单统计数据：', orderData.value)
+  console.log('获取到订单统计数据:', orderData.value)
 }
 
 // chart4 销量排名TOP10
@@ -129,7 +129,7 @@ const getTopData = async (begin: string, end: string) => {
     nameList: res.data.nameList.split(',').reverse(),
     numberList: res.data.numberList.split(',').reverse(),
   }
-  console.log('获取到销量top10统计数据：', top10Data.value)
+  console.log('获取到销量top10统计数据:', top10Data.value)
 }
 
 // 获取当前选中的tab时间
@@ -222,7 +222,7 @@ const handleExport = async () => {
         <div class="item">{{ item }}</div>
       </div>
       <div class="get-time">
-        <p> 已选时间：{{ tateData[0] }} 至 {{ tateData[tateData.length - 1] }} </p>
+        <p> 已选时间:{{ tateData[0] }} 至 {{ tateData[tateData.length - 1] }} </p>
       </div>
     </div>
     <el-button type="success" @click="handleExport">数据导出</el-button>

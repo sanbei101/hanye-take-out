@@ -107,7 +107,7 @@ const chooseImg = () => {
   }
 }
 
-// 在文件管理器中选择图片后触发的改变事件：预览
+// 在文件管理器中选择图片后触发的改变事件:预览
 const onFileChange1 = (e: Event) => {
   // 获取用户选择的文件列表（伪数组）
   console.log(e)
@@ -215,7 +215,7 @@ const submit = async (keep: any) => {
     console.log('submit')
     console.log(form)
     // --- 处理完毕，开始提交 ---
-    // 情况1：无路径参数，form.id保持默认值0，新增套餐
+    // 情况1:无路径参数，form.id保持默认值0，新增套餐
     if (form.id === 0) {
       console.log('新增套餐')
       const res = await addSetmealAPI(form)
@@ -248,7 +248,7 @@ const submit = async (keep: any) => {
         })
       }
     }
-    // 情况2：有路径参数，修改套餐
+    // 情况2:有路径参数，修改套餐
     else {
       console.log('修改套餐')
       const res = await updateSetmealAPI(form)

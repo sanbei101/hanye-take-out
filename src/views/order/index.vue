@@ -100,7 +100,7 @@ const activeIndex = ref(0);
 
 // 监视订单数量变化
 watch(orderStatics, (newValue) => {
-  console.log('watch订单数量变化：', newValue);
+  console.log('watch订单数量变化:', newValue);
   changedOrderList[1].num = newValue && newValue.toBeConfirmed;
   changedOrderList[2].num = newValue && newValue.confirmed;
   changedOrderList[3].num = newValue && newValue.deliveryInProgress;
@@ -149,7 +149,7 @@ const init = async (activeIndex: number = 0, search?: boolean) => {
       throw new Error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -166,7 +166,7 @@ const getOrderListBy3Status = async () => {
       throw new Error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -186,7 +186,7 @@ const goDetail = async (id: any, status: number, row?: any) => {
     dialogVisible.value = true;
     dialogOrderStatus.value = status;
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -207,7 +207,7 @@ const orderAccept = async (row: any) => {
       throw new Error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -257,7 +257,7 @@ const confirmCancel = async () => {
       throw new Error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -277,7 +277,7 @@ const deliveryOrComplete = async (status: number, id: number) => {
       throw new Error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了：', err);
+    console.error('请求出错了:', err);
   }
 };
 
@@ -354,7 +354,7 @@ onMounted(async () => {
     <div class="container" :class="{ hContainer: tableData.length }">
       <!-- 搜索项 -->
       <div class="tableBar">
-        <label style="margin-right: 5px; font-size: 14px">订单号：</label>
+        <label style="margin-right: 5px; font-size: 14px">订单号:</label>
         <el-input
           v-model="input"
           placeholder="请填写订单号"
@@ -362,7 +362,7 @@ onMounted(async () => {
           clearable
           @clear="init(orderStatus)"
           @keyup.enter="initFun(orderStatus)" />
-        <label style="margin: 0 5px 0 30px; font-size: 14px">手机号：</label>
+        <label style="margin: 0 5px 0 30px; font-size: 14px">手机号:</label>
         <el-input
           v-model="phone"
           placeholder="请填写手机号"
@@ -370,7 +370,7 @@ onMounted(async () => {
           clearable
           @clear="init(orderStatus)"
           @keyup.enter="initFun(orderStatus)" />
-        <label style="margin: 0 5px 0 30px; font-size: 14px">下单时间：</label>
+        <label style="margin: 0 5px 0 30px; font-size: 14px">下单时间:</label>
         <el-date-picker
           v-model="rangeTime"
           clearable
@@ -500,7 +500,7 @@ onMounted(async () => {
         <div class="order-top">
           <div>
             <div style="display: inline-block">
-              <label style="font-size: 16px">订单号：</label>
+              <label style="font-size: 16px">订单号:</label>
               <div class="order-num">
                 {{ diaForm!.number }}
               </div>
@@ -509,26 +509,26 @@ onMounted(async () => {
               {{ orderList.filter((item) => item.value === dialogOrderStatus)[0].label }}
             </div>
           </div>
-          <p><label>下单时间：</label>{{ diaForm!.orderTime }}</p>
+          <p><label>下单时间:</label>{{ diaForm!.orderTime }}</p>
         </div>
 
         <div class="order-middle">
           <div class="user-info">
             <div class="user-info-box">
               <div class="user-name">
-                <label>用户名：</label>
+                <label>用户名:</label>
                 <span>{{ diaForm!.consignee }}</span>
               </div>
               <div class="user-phone">
-                <label>手机号：</label>
+                <label>手机号:</label>
                 <span>{{ diaForm!.phone }}</span>
               </div>
               <div v-if="[2, 3, 4, 5].includes(dialogOrderStatus)" class="user-getTime">
-                <label>{{ dialogOrderStatus === 5 ? '送达时间：' : '预计送达时间：' }}</label>
+                <label>{{ dialogOrderStatus === 5 ? '送达时间:' : '预计送达时间:' }}</label>
                 <span>{{ dialogOrderStatus === 5 ? diaForm!.deliveryTime : diaForm!.estimatedDeliveryTime }}</span>
               </div>
               <div class="user-address">
-                <label>地址：</label>
+                <label>地址:</label>
                 <span>{{ diaForm!.address }}</span>
               </div>
             </div>
@@ -563,7 +563,7 @@ onMounted(async () => {
             <div class="amount-label">费用</div>
             <div class="amount-list">
               <div class="dish-amount">
-                <span class="amount-name">菜品小计：</span>
+                <span class="amount-name">菜品小计:</span>
                 <span class="amount-price"
                   >￥{{
                     diaForm && typeof diaForm.amount === 'number' && typeof diaForm.packAmount === 'number'
@@ -573,27 +573,27 @@ onMounted(async () => {
                 >
               </div>
               <div class="send-amount">
-                <span class="amount-name">派送费：</span>
+                <span class="amount-name">派送费:</span>
                 <span class="amount-price">￥{{ 6 }}</span>
               </div>
               <div class="package-amount">
-                <span class="amount-name">打包费：</span>
+                <span class="amount-name">打包费:</span>
                 <span class="amount-price"
                   >￥{{ diaForm && diaForm.amount && diaForm.packAmount ? ((diaForm!.packAmount * 100) / 100).toFixed(2) : '' }}</span
                 >
               </div>
               <div class="all-amount">
-                <span class="amount-name">合计：</span>
+                <span class="amount-name">合计:</span>
                 <span class="amount-price"
                   >￥{{ diaForm && diaForm.amount && diaForm.packAmount ? ((diaForm!.amount * 100) / 100).toFixed(2) : '' }}</span
                 >
               </div>
               <div class="pay-type">
-                <span class="pay-name">支付渠道：</span>
+                <span class="pay-name">支付渠道:</span>
                 <span class="pay-value">{{ diaForm!.payMethod === 1 ? '微信支付' : '支付宝支付' }}</span>
               </div>
               <div class="pay-time">
-                <span class="pay-name">支付时间：</span>
+                <span class="pay-name">支付时间:</span>
                 <span class="pay-value">{{ diaForm!.checkoutTime }}</span>
               </div>
             </div>
@@ -626,7 +626,7 @@ onMounted(async () => {
       :before-close="() => ((cancelDialogVisible = false), (cancelReason = ''))"
       class="cancelDialog">
       <el-form label-width="90px">
-        <el-form-item :label="cancelDialogTitle + '原因：'">
+        <el-form-item :label="cancelDialogTitle + '原因:'">
           <el-select v-model="cancelReason" :placeholder="'请选择' + cancelDialogTitle + '原因'">
             <el-option
               v-for="(item, index) in cancelDialogTitle === '取消' ? cancelrReasonList : rejectReasonList"
@@ -635,7 +635,7 @@ onMounted(async () => {
               :value="item.label" />
           </el-select>
         </el-form-item>
-        <el-form-item v-if="cancelReason === '自定义原因'" label="原因：">
+        <el-form-item v-if="cancelReason === '自定义原因'" label="原因:">
           <el-input
             v-model.trim="remark"
             type="textarea"

@@ -91,7 +91,7 @@ const chooseImg = () => {
   }
 }
 
-// 在文件管理器中选择图片后触发的改变事件：预览
+// 在文件管理器中选择图片后触发的改变事件:预览
 const onFileChange1 = (e: Event) => {
   // 获取用户选择的文件列表（伪数组）
   console.log(e)
