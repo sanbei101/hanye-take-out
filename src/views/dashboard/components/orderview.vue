@@ -1,79 +1,51 @@
 <template>
   <div class="container">
-    <h2 class="homeTitle">
-      订单管理<i>{{ days[1] }}</i>
-      <div class="more">
-        <router-link to="/order">订单明细</router-link>
-        <el-icon>
-          <ArrowRight />
-        </el-icon>
-      </div>
-    </h2>
-    <div class="orderviewBox">
-      <ul>
-        <li>
-          <span class="status">
-            <el-icon>
-              <DocumentAdd />
-            </el-icon>
-            待接单
-          </span>
-          <span class="num tip">
-            <router-link to="/order?status=2">{{ props.orderviewData.waitingOrders }}</router-link>
-          </span>
-        </li>
-        <li>
-          <span class="status">
-            <el-icon>
-              <Bicycle />
-            </el-icon>
-            待派送
-          </span>
-          <span class="num tip">
-            <router-link to="/order?status=3">{{ props.orderviewData.deliveredOrders }}</router-link>
-          </span>
-        </li>
-        <li>
-          <span class="status">
-            <el-icon>
-              <DocumentChecked />
-            </el-icon>
-            已完成
-          </span>
-          <span class="num">
-            <router-link to="/order?status=5">{{ props.orderviewData.completedOrders }}</router-link>
-          </span>
-        </li>
-        <li>
-          <span class="status">
-            <el-icon>
-              <DocumentDelete />
-            </el-icon>
-            已取消
-          </span>
-          <span class="num">
-            <router-link to="/order?status=6">{{ props.orderviewData.cancelledOrders }}</router-link>
-          </span>
-        </li>
-        <li>
-          <span class="status">
-            <el-icon>
-              <Document />
-            </el-icon>
-            全部订单
-          </span>
-          <span class="num">
-            <router-link to="/order">{{ props.orderviewData.allOrders }}</router-link>
-          </span>
-        </li>
-      </ul>
+    <div class="homeTitle">
+      <h2>
+        订单管理
+      </h2>
+    </div>
+    <div class="overviewBox">
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          待接单
+        </template>
+        <div class="card-content">¥ {{ props.orderviewData.waitingOrders }}</div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          待派送
+        </template>
+        <div class="card-content">{{ props.orderviewData.deliveredOrders }}</div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          已完成
+        </template>
+        <div class="card-content">
+          <router-link to="/order?status=5">
+            {{ props.orderviewData.completedOrders }}
+          </router-link>
+        </div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          已取消
+        </template>
+        <div class="card-content">¥ {{ props.orderviewData.cancelledOrders }}</div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          全部订单
+        </template>
+        <div class="card-content">{{ props.orderviewData.allOrders }}</div>
+      </el-card>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { getday } from '@/utils/date'
+import { ElCard } from 'element-plus';
 
 // Define props
 const props = defineProps<{
@@ -85,9 +57,4 @@ const props = defineProps<{
     allOrders: number
   }
 }>()
-
-// Computed property for days
-const days = computed(() => getday())
 </script>
-
-<style scoped></style>

@@ -1,48 +1,43 @@
 <template>
   <div class="container">
-    <h2 class="homeTitle">
-      套餐总览
-      <div class="more">
-        <router-link to="setmeal">套餐管理</router-link>
-        <el-icon>
-          <ArrowRight />
-        </el-icon>
-      </div>
-    </h2>
-    <div class="orderviewBox">
-      <ul>
-        <li>
-          <span class="status">
-            <el-icon>
-              <Finished />
-            </el-icon>
-            已启售
-          </span>
-          <span class="num">{{ props.setMealData.sold }}</span>
-        </li>
-        <li>
-          <span class="status">
-            <el-icon>
-              <Lock />
-            </el-icon>
-            已停售
-          </span>
-          <span class="num">{{ props.setMealData.discontinued }}</span>
-        </li>
-        <li class="add">
-          <router-link to="setmeal/add">
+    <div class="homeTitle">
+      <h2>
+        套餐总览
+      </h2>
+    </div>
+    <div class="overviewBox">
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          已启售
+        </template>
+        <div class="card-content">¥ {{ props.setMealData.sold }}</div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover">
+        <template #header>
+          已停售
+        </template>
+        <div class="card-content">{{ props.setMealData.discontinued }}</div>
+      </el-card>
+      <el-card class="overviewCard" shadow="hover" style="flex-grow: 0.6;">
+        <template #header>
+          新增套餐
+        </template>
+        <div class="card-content">
+          <router-link to="setmeal/add" style="display: flex;align-items: center;">
             <el-icon>
               <CirclePlus />
             </el-icon>
-            <p>新增套餐</p>
+            <span>新增套餐</span>
           </router-link>
-        </li>
-      </ul>
+        </div>
+      </el-card>
     </div>
   </div>
 </template>
 
+
 <script setup lang="ts">
+import { ElCard, ElIcon } from 'element-plus';
 interface SetMealData {
   sold: number;
   discontinued: number;

@@ -14,9 +14,6 @@
       <SetMealStatistics :setMealData="setMealData" />
       <!-- end -->
     </div>
-    <!-- 订单信息 -->
-    <OrderList :order-statics="orderStatics" @getOrderListBy3Status="getOrderListBy3Status" />
-    <!-- end -->
   </div>
 </template>
 
@@ -28,7 +25,6 @@ import Overview from './components/overview.vue'
 import Orderview from './components/orderview.vue'
 import CuisineStatistics from './components/dishStatistics.vue'
 import SetMealStatistics from './components/setmealStatistics.vue'
-import OrderList from './components/orderList.vue'
 
 // 状态定义
 const overviewData = ref<any>({})
@@ -75,3 +71,47 @@ onMounted(() => {
   init()
 })
 </script>
+
+<style>
+.homeTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+}
+
+.overviewBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0.5rem 1rem;
+}
+
+.overviewCard {
+  flex: 1;
+  min-width: 200px;
+}
+
+
+.card-content {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .overviewCard {
+    flex-basis: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .overviewCard {
+    flex-basis: 100%;
+  }
+}
+</style>
