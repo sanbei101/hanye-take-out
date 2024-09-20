@@ -278,10 +278,10 @@ onBeforeUnmount(() => {
     <el-container>
       <el-header style="display: flex;justify-content: space-between;align-items: center;">
         <el-space>
-          <el-icon v-if="isCollapse">
+          <el-icon v-if="isCollapse" style="cursor: pointer;">
             <Expand @click.stop="isCollapse = !isCollapse" />
           </el-icon>
-          <el-icon v-else>
+          <el-icon v-else style="cursor: pointer;">
             <Fold @click.stop="isCollapse = !isCollapse" />
           </el-icon>
           <el-tag type="primary">{{ status == 1 ? '营业中' : "打烊中" }}</el-tag>
