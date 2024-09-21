@@ -2,6 +2,19 @@
 import { reactive, ref } from 'vue';
 import { getCategoryPageListAPI, updateCategoryStatusAPI, deleteCategoryAPI } from '@/api/category';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import {
+  ElCard,
+  ElInput,
+  ElSelect,
+  ElButton,
+  ElTable,
+  ElTableColumn,
+  ElEmpty,
+  ElPagination,
+  ElOption,
+  ElIcon,
+  ElSpace
+} from 'element-plus';
 import { useRouter } from 'vue-router';
 
 // ------ .d.ts 属性类型接口 ------
@@ -127,18 +140,16 @@ const delete_btn = (row: any) => {
 
 <template>
   <el-card>
-    <div class="horizontal">
+    <el-space>
       <el-input size="large" class="input" v-model="pageData.name" placeholder="请输入分类名" />
-      <el-select size="large" class="input" clearable v-model="pageData.type" placeholder="选择分类类型">
+      <el-select size="large" class="input" clearable v-model="pageData.type" placeholder="选择分类类型" style="min-width: 200px">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
       <el-button size="large" class="btn" round type="success" @click="init()">查询分类</el-button>
       <el-button size="large" class="btn" type="primary" @click="router.push('/category/add')">
-        <el-icon style="font-size: 15px; margin-right: 10px">
-          <Plus /> </el-icon
-        >添加分类
+        <el-icon style="font-size: 15px; margin-right: 10px"> <Plus /> </el-icon>添加分类
       </el-button>
-    </div>
+    </el-space>
     <el-table :data="categoryList" stripe>
       <!-- <el-table-column prop="id" label="id" /> -->
       <el-table-column prop="name" label="分类名" />
@@ -172,9 +183,6 @@ const delete_btn = (row: any) => {
       </template>
     </el-table>
 
-    <!-- element ui 官方推荐使用 v-model 双向绑定 而不是使用事件监听 -->
-    <!-- 但是为了监听后还要调用相关函数，看来只能用事件了... -->
-    <!-- 有没有办法让v-model的值发生改变时自动触发更新函数？ -->
     <el-pagination
       class="page"
       background
@@ -187,55 +195,3 @@ const delete_btn = (row: any) => {
       @size-change="handleSizeChange" />
   </el-card>
 </template>
-
-<style lang="less" scoped>
-// element-plus的样式修改
-.el-table {
-  width: 90%;
-  height: 500px;
-  margin: 3rem auto;
-  text-align: center;
-  border: 1px solid #e4e4e4;
-}
-
-:deep(.el-table tr) {
-  font-size: 12px;
-}
-
-.el-button {
-  width: 45px;
-  font-size: 12px;
-}
-
-.el-pagination {
-  justify-content: center;
-}
-
-// 自定义样式
-.horizontal {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 80px;
-
-  .input {
-    width: 200px;
-  }
-
-  .btn {
-    width: 150px;
-  }
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-}
-
-.add_btn {
-  width: 100px;
-  height: 40px;
-  margin-left: 900px;
-}
-</style>

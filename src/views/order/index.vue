@@ -371,6 +371,7 @@ onMounted(async () => {
         @clear="init(orderStatus)" />
       <el-button class="normal-btn continue" @click="init(orderStatus, true)">查询</el-button>
     </div>
+
     <el-table v-if="tableData.length" :data="tableData" stripe class="tableBox">
       <el-table-column key="number" prop="number" label="订单号" />
       <el-table-column v-if="[2, 3, 4].includes(orderStatus)" key="orderDishes" prop="orderDishes" label="订单菜品" />
