@@ -2,7 +2,22 @@
 import { reactive, ref } from 'vue';
 import { getDishPageListAPI, updateDishStatusAPI, deleteDishesAPI } from '@/api/dish';
 import { getCategoryPageListAPI } from '@/api/category';
-import { ElMessage, ElMessageBox, ElTable } from 'element-plus';
+import {
+  ElMessage,
+  ElMessageBox,
+  ElTable,
+  ElPagination,
+  ElTag,
+  ElEmpty,
+  ElButton,
+  ElSelect,
+  ElOption,
+  ElInput,
+  ElCard,
+  ElTableColumn,
+  ElIcon,
+  ElSpace
+} from 'element-plus';
 import { useRouter } from 'vue-router';
 
 // ------ .d.ts 属性类型接口 ------
@@ -173,12 +188,12 @@ const deleteBatch = (row?: any) => {
 
 <template>
   <el-card>
-    <div class="horizontal">
+    <el-space :wrap="true">
       <el-input size="large" class="input" v-model="pageData.name" placeholder="请输入菜品名" />
-      <el-select size="large" class="input" clearable v-model="pageData.categoryId" placeholder="选择分类类型">
+      <el-select size="large" class="input" clearable v-model="pageData.categoryId" placeholder="选择分类类型" style="min-width: 200px">
         <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id" />
       </el-select>
-      <el-select class="input" clearable v-model="pageData.status" placeholder="选择菜品状态" size="large">
+      <el-select class="input" clearable v-model="pageData.status" placeholder="选择菜品状态" size="large" style="min-width: 200px">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
       <el-button size="large" class="btn" round type="success" @click="showPageList()">查询菜品</el-button>
@@ -186,7 +201,7 @@ const deleteBatch = (row?: any) => {
       <el-button size="large" class="btn" type="primary" @click="to_add_update()">
         <el-icon style="font-size: 15px; margin-right: 10px"> <Plus /> </el-icon>添加菜品
       </el-button>
-    </div>
+    </el-space>
     <el-table class="table_box" ref="multiTableRef" :data="dishList" stripe @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" />
       <!-- <el-table-column prop="id" label="id" /> -->
@@ -228,9 +243,6 @@ const deleteBatch = (row?: any) => {
       </template>
     </el-table>
 
-    <!-- element ui 官方推荐使用 v-model 双向绑定 而不是使用事件监听 -->
-    <!-- 但是为了监听后还要调用相关函数,看来只能用事件了... -->
-    <!-- 有没有办法让v-model的值发生改变时自动触发更新函数？ -->
     <el-pagination
       class="page"
       background
@@ -243,59 +255,3 @@ const deleteBatch = (row?: any) => {
       @size-change="handleSizeChange" />
   </el-card>
 </template>
-
-<style lang="less" scoped>
-// element-plus的样式修改
-.el-table {
-  width: 90%;
-  height: 500px;
-  margin: 3rem auto;
-  text-align: center;
-  border: 1px solid #e4e4e4;
-}
-
-:deep(.el-table tr) {
-  font-size: 12px;
-}
-
-.el-button {
-  width: 45px;
-  font-size: 12px;
-}
-
-.el-pagination {
-  justify-content: center;
-}
-
-// 自定义样式
-body {
-  background-color: #c91c1c;
-}
-
-.horizontal {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 80px;
-
-  .input {
-    width: 160px;
-  }
-
-  .btn {
-    width: 120px;
-  }
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-}
-
-.add_btn {
-  width: 100px;
-  height: 40px;
-  margin-left: 900px;
-}
-</style>
