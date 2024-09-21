@@ -47,7 +47,6 @@ const props = defineProps<{
   overviewData: OverviewData;
 }>();
 
-
 const initChart = () => {
   const chartDom = document.getElementById('ordermain') as HTMLElement;
   const myChart = echarts.init(chartDom);
@@ -59,15 +58,15 @@ const initChart = () => {
       textStyle: {
         color: '#333',
         fontSize: 12,
-        fontWeight: 300,
-      },
+        fontWeight: 300
+      }
     },
     grid: {
       top: '15%',
       left: '6%',
       right: '10%',
       bottom: '12%',
-      containLabel: true,
+      containLabel: true
     },
     xAxis: {
       type: 'category',
@@ -75,16 +74,16 @@ const initChart = () => {
       axisLabel: {
         textStyle: {
           color: '#666',
-          fontSize: '12px',
-        },
+          fontSize: '12px'
+        }
       },
       axisLine: {
         lineStyle: {
           color: '#E5E4E4',
-          width: 1,
-        },
+          width: 1
+        }
       },
-      data: props.orderdata.data.dateList,
+      data: props.orderdata.data.dateList
     },
     yAxis: [
       {
@@ -94,13 +93,13 @@ const initChart = () => {
         axisLabel: {
           textStyle: {
             color: '#666',
-            fontSize: '12px',
-          },
-        },
-      },
+            fontSize: '12px'
+          }
+        }
+      }
     ],
     legend: {
-      // 对指定的data线，设置不同的legend格式
+      // 对指定的data线,设置不同的legend格式
       // data: ['用户总量（个）', '新增用户（个）'],
       bottom: '0%',
       icon: 'rect',
@@ -122,18 +121,18 @@ const initChart = () => {
           normal: {
             color: '#FFD000',
             lineStyle: {
-              color: '#FFD000',
-            },
+              color: '#FFD000'
+            }
           },
           emphasis: {
             color: '#fff',
             borderWidth: 5,
-            borderColor: '#FFC100',
-          },
+            borderColor: '#FFC100'
+          }
         },
         areaStyle: {
           // opacity: 0.5,
-          // 从上到下渐变，(0,0)是上部，(0,1)是下部
+          // 从上到下渐变,(0,0)是上部,(0,1)是下部
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -145,7 +144,7 @@ const initChart = () => {
             }
           ])
         },
-        data: props.orderdata.data.orderCountList,
+        data: props.orderdata.data.orderCountList
       },
       {
         name: '有效订单（个）',
@@ -157,18 +156,18 @@ const initChart = () => {
           normal: {
             color: '#FD7F7F',
             lineStyle: {
-              color: '#FD7F7F',
-            },
+              color: '#FD7F7F'
+            }
           },
           emphasis: {
             color: '#fff',
             borderWidth: 5,
-            borderColor: '#FD7F7F',
-          },
+            borderColor: '#FD7F7F'
+          }
         },
         areaStyle: {
           // opacity: 0.5,
-          // 从上到下渐变，(0,0)是上部，(0,1)是下部
+          // 从上到下渐变,(0,0)是上部,(0,1)是下部
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -180,9 +179,9 @@ const initChart = () => {
             }
           ])
         },
-        data: props.orderdata.data.validOrderCountList,
-      },
-    ],
+        data: props.orderdata.data.validOrderCountList
+      }
+    ]
   };
   myChart.setOption(option);
 };
@@ -191,13 +190,15 @@ onMounted(() => {
   initChart();
 });
 
-watch(() => props.orderdata, (newVal) => {
-  if (newVal) {
-    initChart();
+watch(
+  () => props.orderdata,
+  (newVal) => {
+    if (newVal) {
+      initChart();
+    }
   }
-});
+);
 </script>
-
 
 <style lang="less" scoped>
 .chartTitle {
@@ -209,16 +210,16 @@ watch(() => props.orderdata, (newVal) => {
 .orderProportion {
   display: flex;
   margin-left: 20px;
-  .simple{
+  .simple {
     font-size: 14px;
     color: #666;
   }
-  .deep{
+  .deep {
     font-size: 16px;
     font-weight: bold;
     color: #333;
   }
-  .symbol{
+  .symbol {
     font-size: 16px;
     font-weight: bold;
     color: #666;

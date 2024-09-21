@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { addEmployeeAPI } from '@/api/employee'
-import { useRouter, useRoute } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { reactive, ref } from 'vue';
+import { addEmployeeAPI } from '@/api/employee';
+import { useRouter, useRoute } from 'vue-router';
+import { ElMessage } from 'element-plus';
 
 // ------ 数据 ------
-const formLabelWidth = '60px'
+const formLabelWidth = '60px';
 const form = reactive({
   id: 0,
   name: '',
@@ -14,20 +14,20 @@ const form = reactive({
   phone: '',
   age: '',
   gender: '',
-  pic: '',
-})
+  pic: ''
+});
 const genders = [
   {
     value: 1,
-    label: '男',
+    label: '男'
   },
   {
     value: 0,
-    label: '女',
+    label: '女'
   }
-]
-const inputRef1 = ref<HTMLInputElement | null>(null)
-const addRef = ref()
+];
+const inputRef1 = ref<HTMLInputElement | null>(null);
+const addRef = ref();
 
 // 表单校验
 const checkAge = (_rule: any, value: string, callback: (error?: Error) => void) => {
@@ -45,12 +45,12 @@ const checkAge = (_rule: any, value: string, callback: (error?: Error) => void) 
       callback();
     }
   }
-}
+};
 const rules = {
   name: [
     { required: true, trigger: 'blur', message: '不能为空' },
     { min: 2, message: '姓名长度不能少于2个字符', trigger: 'blur' },
-    { max: 20, message: '姓名长度不能超过20个字符', trigger: 'blur' },
+    { max: 20, message: '姓名长度不能超过20个字符', trigger: 'blur' }
   ],
   account: [
     { required: true, trigger: 'blur', message: '不能为空' },
@@ -68,71 +68,68 @@ const rules = {
     { required: true, trigger: 'blur', message: '不能为空' },
     { validator: checkAge, trigger: 'blur' }
   ],
-  gender: [
-    { required: true, trigger: 'blur', message: '不能为空' },
-  ],
-}
-
+  gender: [{ required: true, trigger: 'blur', message: '不能为空' }]
+};
 
 // ------ 方法 ------
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
 // 选择图片->点击事件->让选择框出现
 const chooseImg = () => {
-  // 模拟点击input框的行为，通过点击按钮触发另一个input框的事件，移花接木
-  // 否则直接调用input框，其样式不太好改    input框中有个inputRef1属性，让inputRef1去click模拟点击行为
+  // 模拟点击input框的行为,通过点击按钮触发另一个input框的事件,移花接木
+  // 否则直接调用input框,其样式不太好改    input框中有个inputRef1属性,让inputRef1去click模拟点击行为
   if (inputRef1.value) {
-    inputRef1.value.click() // 当input框的type是file时，click()方法会触发选择文件的对话框(弹出文件管理器)
+    inputRef1.value.click(); // 当input框的type是file时,click()方法会触发选择文件的对话框(弹出文件管理器)
   }
-}
+};
 
 // 在文件管理器中选择图片后触发的改变事件:预览
 const onFileChange1 = (e: Event) => {
   // 获取用户选择的文件列表（伪数组）
-  console.log(e)
-  const target = e.target as HTMLInputElement
+  console.log(e);
+  const target = e.target as HTMLInputElement;
   const files = target.files;
   if (files && files.length > 0) {
     // 选择了图片
-    console.log(files[0])
+    console.log(files[0]);
     // 文件 -> base64字符串  (可以发给后台)
     // 1. 创建 FileReader 对象
-    const fr = new FileReader()
-    // 2. 调用 readAsDataURL 函数，读取文件内容
-    fr.readAsDataURL(files[0])
-    // 3. 监听 fr 的 onload 事件，文件转为base64字符串成功后会触发该事件
+    const fr = new FileReader();
+    // 2. 调用 readAsDataURL 函数,读取文件内容
+    fr.readAsDataURL(files[0]);
+    // 3. 监听 fr 的 onload 事件,文件转为base64字符串成功后会触发该事件
     fr.onload = () => {
-      // 4. 通过 e.target.result 获取到读取的结果，值是字符串（base64 格式的字符串）
-      form.pic = fr.result as string
-      console.log('avatar')
-      console.log(form.pic)
-    }
+      // 4. 通过 e.target.result 获取到读取的结果,值是字符串（base64 格式的字符串）
+      form.pic = fr.result as string;
+      console.log('avatar');
+      console.log(form.pic);
+    };
   }
-}
+};
 
-// 添加员工信息后提交（只有管理员才能对其他员工进行修改，否则普通员工只能对自己进行修改）
+// 添加员工信息后提交（只有管理员才能对其他员工进行修改,否则普通员工只能对自己进行修改）
 const submit = async () => {
   try {
     const valid = await addRef.value.validate();
     if (valid) {
-      console.log('submit')
-      console.log(form)
+      console.log('submit');
+      console.log(form);
       // 在这里执行表单提交操作
-      const res = await addEmployeeAPI(form)
+      const res = await addEmployeeAPI(form);
       if (res.data.code !== 0) {
-        console.log('新增员工失败！')
-        return false
+        console.log('新增员工失败！');
+        return false;
       }
-      // 然后进行 消息提示，页面跳转 等操作
+      // 然后进行 消息提示,页面跳转 等操作
       ElMessage({
         message: '新增员工成功',
-        type: 'success',
-      })
+        type: 'success'
+      });
       router.push({
-        path: '/employee',
-      })
+        path: '/employee'
+      });
     } else {
       console.log('form not valid!');
       return false;
@@ -140,19 +137,19 @@ const submit = async () => {
   } catch (error) {
     console.error('执行过程中失败:', error);
   }
-}
+};
 // 取消修改
 const cancel = () => {
   router.push({
-    path: '/employee',
-  })
-}
+    path: '/employee'
+  });
+};
 
 const init = async () => {
-  console.log(route.query)
-}
+  console.log(route.query);
+};
 
-init()
+init();
 </script>
 
 <template>
@@ -185,7 +182,7 @@ init()
         <img class="the_img" v-else :src="form.pic" alt="" />
         <input type="file" accept="image/*" style="display: none" ref="inputRef1" @change="onFileChange1" />
         <el-button type="primary" @click="chooseImg">
-          <el-icon style="font-size: 15px; margin-right: 10px;">
+          <el-icon style="font-size: 15px; margin-right: 10px">
             <Plus />
           </el-icon>
           选择图片

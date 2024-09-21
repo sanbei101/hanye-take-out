@@ -18,58 +18,58 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { getBusinessDataAPI, getOrderDataAPI, getOverviewDishesAPI, getSetMealStatisticsAPI } from '@/api/dashboard'
-import { getOrderListByAPI } from '@/api/order'
-import Overview from './components/overview.vue'
-import Orderview from './components/orderview.vue'
-import CuisineStatistics from './components/dishStatistics.vue'
-import SetMealStatistics from './components/setmealStatistics.vue'
+import { ref, onMounted } from 'vue';
+import { getBusinessDataAPI, getOrderDataAPI, getOverviewDishesAPI, getSetMealStatisticsAPI } from '@/api/dashboard';
+import { getOrderListByAPI } from '@/api/order';
+import Overview from './components/overview.vue';
+import Orderview from './components/orderview.vue';
+import CuisineStatistics from './components/dishStatistics.vue';
+import SetMealStatistics from './components/setmealStatistics.vue';
 
 // 状态定义
-const overviewData = ref<any>({})
-const orderviewData = ref<any>({})
-const dishesData = ref<any>({})
-const setMealData = ref<any>({})
-const orderStatics = ref<any>({})
+const overviewData = ref<any>({});
+const orderviewData = ref<any>({});
+const dishesData = ref<any>({});
+const setMealData = ref<any>({});
+const orderStatics = ref<any>({});
 
 const init = async () => {
   try {
-    const businessData = await getBusinessDataAPI()
-    overviewData.value = businessData.data.data
+    const businessData = await getBusinessDataAPI();
+    overviewData.value = businessData.data.data;
 
-    const orderData = await getOrderDataAPI()
-    orderviewData.value = orderData.data.data
+    const orderData = await getOrderDataAPI();
+    orderviewData.value = orderData.data.data;
 
-    const overviewDishes = await getOverviewDishesAPI()
-    dishesData.value = overviewDishes.data.data
+    const overviewDishes = await getOverviewDishesAPI();
+    dishesData.value = overviewDishes.data.data;
 
-    const setMealStatistics = await getSetMealStatisticsAPI()
-    setMealData.value = setMealStatistics.data.data
+    const setMealStatistics = await getSetMealStatisticsAPI();
+    setMealData.value = setMealStatistics.data.data;
 
-    await getOrderListBy3Status()
+    await getOrderListBy3Status();
   } catch (error) {
-    console.error('初始化数据时出错: ', error)
+    console.error('初始化数据时出错: ', error);
   }
-}
+};
 
-// 获取待处理，待派送，派送中数量
+// 获取待处理,待派送,派送中数量
 const getOrderListBy3Status = async () => {
   try {
-    const res = await getOrderListByAPI()
+    const res = await getOrderListByAPI();
     if (res.data.code === 0) {
-      orderStatics.value = res.data.data
+      orderStatics.value = res.data.data;
     } else {
-      console.error(res.data.msg)
+      console.error(res.data.msg);
     }
   } catch (err) {
-    console.error('请求出错了: ', err)
+    console.error('请求出错了: ', err);
   }
-}
+};
 
 onMounted(() => {
-  init()
-})
+  init();
+});
 </script>
 
 <style>
@@ -96,7 +96,6 @@ onMounted(() => {
   flex: 1;
   min-width: 200px;
 }
-
 
 .card-content {
   display: flex;

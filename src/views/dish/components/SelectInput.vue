@@ -1,17 +1,23 @@
 <template>
   <div class="selectInput">
-    <el-input v-model="keyValue" type="text" style="width: 100%" placeholder="请选择口味" clearable readonly
-      @focus="selectFlavor(true)" @blur="outSelect(false)" />
+    <el-input
+      v-model="keyValue"
+      type="text"
+      style="width: 100%"
+      placeholder="请选择口味"
+      clearable
+      readonly
+      @focus="selectFlavor(true)"
+      @blur="outSelect(false)" />
     <div v-if="mak && dishFlavorsData.length" class="flavorSelect">
-      <span v-for="(item, index) in dishFlavorsData" :key="index" class="items" @click="checkOption(item, index)">{{
-        item.name }}</span>
+      <span v-for="(item, index) in dishFlavorsData" :key="index" class="items" @click="checkOption(item, index)">{{ item.name }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-// defineProps defineEmits 无需显示导入，但下面还是要定义使用的
+import { ref, watch } from 'vue';
+// defineProps defineEmits 无需显示导入,但下面还是要定义使用的
 interface DishFlavorName {
   name: string;
 }
@@ -19,42 +25,44 @@ interface DishFlavorName {
 const props = defineProps({
   dishFlavorsData: {
     type: Array as () => DishFlavorName[],
-    default: () => [],
+    default: () => []
   },
   value: {
     type: [String, Number],
-    default: '',
+    default: ''
   },
   index: {
     type: Number,
-    default: 0,
-  },
-})
+    default: 0
+  }
+});
 
 const mak = ref(false);
-const keyValue = ref(props.value)
+const keyValue = ref(props.value);
 
 const selectFlavor = (status: any) => {
   mak.value = status;
-}
+};
 
 const outSelect = (status: any) => {
   setTimeout(() => {
     mak.value = status;
-  }, 200)
-}
+  }, 200);
+};
 
 // 使用setup语法糖的话要先引入defineEmits来定义
-const emit = defineEmits(["select"])
+const emit = defineEmits(['select']);
 const checkOption = (item: any, index: number) => {
-  emit('select', item.name, props.index, index)
-  keyValue.value = item.name
-}
+  emit('select', item.name, props.index, index);
+  keyValue.value = item.name;
+};
 
-watch(() => props.value, (newVal) => {
-  keyValue.value = newVal
-})
-
+watch(
+  () => props.value,
+  (newVal) => {
+    keyValue.value = newVal;
+  }
+);
 </script>
 
 <style lang="less" scoped>

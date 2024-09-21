@@ -36,7 +36,7 @@ const rules = {
 
 const router = useRouter();
 
-// 添加分类信息后提交（只有管理员才能对其他分类进行修改，否则普通分类只能对自己进行修改）
+// 添加分类信息后提交（只有管理员才能对其他分类进行修改,否则普通分类只能对自己进行修改）
 const submit = async () => {
   try {
     const valid = await addRef.value.validate();
@@ -49,7 +49,7 @@ const submit = async () => {
         console.log('新增分类失败！');
         return false;
       }
-      // 然后进行 消息提示，页面跳转 等操作
+      // 然后进行 消息提示,页面跳转 等操作
       ElMessage({
         message: '新增分类成功',
         type: 'success'

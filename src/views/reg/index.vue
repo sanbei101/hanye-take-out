@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 导出是命名导出，所以这里导入要加{}
+// 导出是命名导出,所以这里导入要加{}
 import { registerAPI } from '@/api/employee';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
@@ -15,13 +15,13 @@ const form = ref({
 const registerRef = ref();
 
 // 自定义校验规则: 两次密码是否一致
-// 注意:必须在data函数里定义此箭头函数，才能确保this.from能使用，从而获取到password的值
+// 注意:必须在data函数里定义此箭头函数,才能确保this.from能使用,从而获取到password的值
 const samePwd = (_rules: any, value: any, callback: any) => {
   if (value !== form.value.password) {
-    // 如果验证失败，则调用 回调函数时，指定一个 Error 对象。
+    // 如果验证失败,则调用 回调函数时,指定一个 Error 对象。
     callback(new Error('两次输入的密码不一致!'));
   } else {
-    // 如果验证成功，则直接调用 callback 回调函数即可。
+    // 如果验证成功,则直接调用 callback 回调函数即可。
     callback();
   }
 };
@@ -56,18 +56,18 @@ const registerFn = async () => {
   // 先校验输入格式是否合法
   const valid = await registerRef.value.validate();
   if (valid) {
-    // 通过校验，拿到绑定的数据
+    // 通过校验,拿到绑定的数据
     console.log('注册的表单ref:  ', registerRef);
     console.log('form.value:  ', form.value);
-    // 1.调用注册接口，通过接口的return request，拿到promise对象
+    // 1.调用注册接口,通过接口的return request,拿到promise对象
     const { data: res } = await registerAPI(form.value);
     console.log(res);
-    // 2.注册失败，响应拦截器已经ElMessage提示用户，这里直接返回
+    // 2.注册失败,响应拦截器已经ElMessage提示用户,这里直接返回
     if (res.code !== 0) {
       console.log('注册失败！');
       return false;
     }
-    // 3.注册成功，提示用户
+    // 3.注册成功,提示用户
     ElMessage.success('注册成功!');
     // 4.路由跳转到登录页面
     router.push('/login');
@@ -140,7 +140,7 @@ const registerFn = async () => {
       <!-- 标题“后台管理系统(图片)”的盒子 -->
       <div class="title-box">注 册</div>
       <!-- 注册的表单区域 -->
-      <!-- el-form 自带校验能力，所以直接自定义规则就行(不用什么自定义监听之类的) -->
+      <!-- el-form 自带校验能力,所以直接自定义规则就行(不用什么自定义监听之类的) -->
       <el-form :model="form" label-width="0px" :rules="rules" ref="registerRef">
         <el-form-item prop="account">
           <el-input placeholder="请输入用户名" v-model="form.account"></el-input>
@@ -256,7 +256,7 @@ body {
   }
 
   .btn-reg {
-    width: 100%; // 可以让其占满一行，不用考虑怎么变成块级然后独占一行之类的...
+    width: 100%; // 可以让其占满一行,不用考虑怎么变成块级然后独占一行之类的...
   }
 
   .router {

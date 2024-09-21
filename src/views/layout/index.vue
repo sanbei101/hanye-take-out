@@ -132,8 +132,8 @@ const changePassword = async () => {
 };
 
 const logoutUser = () => {
-  // 为了让用户体验更好，来个确认提示框
-  ElMessageBox.confirm('走了，爱是会消失的吗?', '退出登录', {
+  // 为了让用户体验更好,来个确认提示框
+  ElMessageBox.confirm('走了,爱是会消失的吗?', '退出登录', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -143,7 +143,7 @@ const logoutUser = () => {
         type: 'success',
         message: '退出成功'
       });
-      // 清除用户信息，包括token
+      // 清除用户信息,包括token
       userInfoStore.userInfo = null;
       console.log(userInfoStore);
       router.push('/login');
@@ -169,10 +169,10 @@ const webSocket = () => {
   console.log('socketUrl', socketUrl);
 
   if (typeof WebSocket == 'undefined') {
-    console.log('当前浏览器无法接收实时报警信息，请使用谷歌浏览器！');
+    console.log('当前浏览器无法接收实时报警信息,请使用谷歌浏览器！');
     ElNotification({
       title: '提示',
-      message: '当前浏览器无法接收实时报警信息，请使用谷歌浏览器！',
+      message: '当前浏览器无法接收实时报警信息,请使用谷歌浏览器！',
       type: 'warning',
       duration: 0
     });
@@ -184,7 +184,7 @@ const webSocket = () => {
     websocket.value.onmessage = (msg) => {
       console.log('接收到的消息', msg);
       audio1.value && audio1.value.click();
-      // 重置音频，从头开始播放
+      // 重置音频,从头开始播放
       audio1.value!.currentTime = 0;
       audio2.value!.currentTime = 0;
       // 解析服务器通过WebSocket发送的消息
@@ -216,7 +216,7 @@ const webSocket = () => {
     websocket.value.onerror = () => {
       ElNotification({
         title: '错误',
-        message: '服务器错误，无法接收实时报警信息',
+        message: '服务器错误,无法接收实时报警信息',
         type: 'error',
         duration: 0
       });
@@ -251,11 +251,11 @@ onBeforeUnmount(() => {
       <el-radio-group v-model="status_active">
         <el-radio :value="1" size="large"
           >营业中
-          <span>当前餐厅处于营业状态，自动接收任何订单，可点击打烊进入店铺打烊状态。</span>
+          <span>当前餐厅处于营业状态,自动接收任何订单,可点击打烊进入店铺打烊状态。</span>
         </el-radio>
         <el-radio :value="0" size="large"
           >打烊中
-          <span>当前餐厅处于打烊状态，仅接受营业时间内的预定订单，可点击营业中手动恢复营业状态。</span>
+          <span>当前餐厅处于打烊状态,仅接受营业时间内的预定订单,可点击营业中手动恢复营业状态。</span>
         </el-radio>
       </el-radio-group>
       <template #footer>

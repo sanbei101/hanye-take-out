@@ -1,4 +1,4 @@
-import request from '@/utils/request' // 引入自定义的axios函数
+import request from '@/utils/request'; // 引入自定义的axios函数
 
 /**
  * 添加分类
@@ -10,8 +10,8 @@ export const addCategoryAPI = (params: any) => {
     url: '/category',
     method: 'post',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 获取分类分页列表
@@ -19,16 +19,16 @@ export const addCategoryAPI = (params: any) => {
  * @returns
  */
 export const getCategoryPageListAPI = (params: any) => {
-  console.log('type呢！！！', params)
+  console.log('type呢！！！', params);
   return request({
     url: '/category/page',
     method: 'get',
     params
-  })
-}
+  });
+};
 
 /**
- * 根据id获取分类信息，用于回显
+ * 根据id获取分类信息,用于回显
  * @param id 分类id
  * @returns
  */
@@ -36,8 +36,8 @@ export const getCategoryByIdAPI = (id: number) => {
   return request({
     url: `/category/${id}`,
     method: 'get'
-  })
-}
+  });
+};
 
 /**
  * 修改分类信息
@@ -49,8 +49,8 @@ export const updateCategoryAPI = (params: any) => {
     url: '/category',
     method: 'put',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 修改分类状态
@@ -58,12 +58,12 @@ export const updateCategoryAPI = (params: any) => {
  * @returns
  */
 export const updateCategoryStatusAPI = (id: number) => {
-  console.log('发请求啊！', id)
+  console.log('发请求啊！', id);
   return request({
     url: `/category/status/${id}`,
     method: 'put'
-  })
-}
+  });
+};
 
 /**
  * 根据id删除分类
@@ -74,5 +74,5 @@ export const deleteCategoryAPI = (id: number) => {
   return request({
     url: `/category/${id}`,
     method: 'delete'
-  })
-}
+  });
+};

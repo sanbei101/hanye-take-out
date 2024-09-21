@@ -1,4 +1,4 @@
-import request from '@/utils/request' // 引入自定义的axios函数
+import request from '@/utils/request'; // 引入自定义的axios函数
 
 /**
  * 添加套餐
@@ -10,8 +10,8 @@ export const addSetmealAPI = (params: any) => {
     url: '/setmeal',
     method: 'post',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 获取套餐分页列表
@@ -19,16 +19,16 @@ export const addSetmealAPI = (params: any) => {
  * @returns
  */
 export const getSetmealPageListAPI = (params: any) => {
-  console.log('Setmeal-params', params)
+  console.log('Setmeal-params', params);
   return request({
     url: '/setmeal/page',
     method: 'get',
     params
-  })
-}
+  });
+};
 
 /**
- * 根据id获取套餐信息，用于回显
+ * 根据id获取套餐信息,用于回显
  * @param id 套餐id
  * @returns
  */
@@ -36,8 +36,8 @@ export const getSetmealByIdAPI = (id: number) => {
   return request({
     url: `/setmeal/${id}`,
     method: 'get'
-  })
-}
+  });
+};
 
 /**
  * 修改套餐信息
@@ -49,8 +49,8 @@ export const updateSetmealAPI = (params: any) => {
     url: '/setmeal',
     method: 'put',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 修改套餐状态
@@ -58,12 +58,12 @@ export const updateSetmealAPI = (params: any) => {
  * @returns
  */
 export const updateSetmealStatusAPI = (id: number) => {
-  console.log('套餐id', id)
+  console.log('套餐id', id);
   return request({
     url: `/setmeal/status/${id}`,
     method: 'put'
-  })
-}
+  });
+};
 
 /**
  * 根据ids批量删除套餐
@@ -75,5 +75,5 @@ export const deleteSetmealsAPI = (ids: string) => {
     url: '/setmeal',
     method: 'delete',
     params: { ids }
-  })
-}
+  });
+};

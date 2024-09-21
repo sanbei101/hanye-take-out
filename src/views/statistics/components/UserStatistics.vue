@@ -32,15 +32,15 @@ const initChart = () => {
       textStyle: {
         color: '#333',
         fontSize: 12,
-        fontWeight: 300,
-      },
+        fontWeight: 300
+      }
     },
     grid: {
       top: '20%',
       left: '6%',
       right: '10%',
       bottom: '12%',
-      containLabel: true,
+      containLabel: true
     },
     xAxis: {
       type: 'category',
@@ -48,16 +48,16 @@ const initChart = () => {
       axisLabel: {
         textStyle: {
           color: '#666',
-          fontSize: '12px',
-        },
+          fontSize: '12px'
+        }
       },
       axisLine: {
         lineStyle: {
           color: '#E5E4E4',
-          width: 1,
-        },
+          width: 1
+        }
       },
-      data: props.userdata.dateList,
+      data: props.userdata.dateList
     },
     yAxis: [
       {
@@ -66,13 +66,13 @@ const initChart = () => {
         axisLabel: {
           textStyle: {
             color: '#666',
-            fontSize: '12px',
-          },
-        },
-      },
+            fontSize: '12px'
+          }
+        }
+      }
     ],
     legend: {
-      // 对指定的data线，设置不同的legend格式
+      // 对指定的data线,设置不同的legend格式
       // data: ['用户总量（个）', '新增用户（个）'],
       bottom: '0%',
       icon: 'rect',
@@ -94,18 +94,18 @@ const initChart = () => {
           normal: {
             color: '#FFD000',
             lineStyle: {
-              color: '#FFD000',
-            },
+              color: '#FFD000'
+            }
           },
           emphasis: {
             color: '#fff',
             borderWidth: 5,
-            borderColor: '#FFC100',
-          },
+            borderColor: '#FFC100'
+          }
         },
         // areaStyle: {
         //   // opacity: 0.5,
-        //   // 从上到下渐变，(0,0)是上部，(0,1)是下部
+        //   // 从上到下渐变,(0,0)是上部,(0,1)是下部
         //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
         //     {
         //       offset: 0,
@@ -117,7 +117,7 @@ const initChart = () => {
         //     }
         //   ])
         // },
-        data: props.userdata.totalUserList,
+        data: props.userdata.totalUserList
       },
       {
         name: '新增用户（个）',
@@ -129,18 +129,18 @@ const initChart = () => {
           normal: {
             color: '#FD7F7F',
             lineStyle: {
-              color: '#FD7F7F',
-            },
+              color: '#FD7F7F'
+            }
           },
           emphasis: {
             color: '#fff',
             borderWidth: 5,
-            borderColor: '#FD7F7F',
-          },
+            borderColor: '#FD7F7F'
+          }
         },
         areaStyle: {
           // opacity: 0.5,
-          // 从上到下渐变，(0,0)是上部，(0,1)是下部
+          // 从上到下渐变,(0,0)是上部,(0,1)是下部
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -152,9 +152,9 @@ const initChart = () => {
             }
           ])
         },
-        data: props.userdata.newUserList,
-      },
-    ],
+        data: props.userdata.newUserList
+      }
+    ]
   };
   myChart.setOption(option);
 };
@@ -163,11 +163,14 @@ onMounted(() => {
   initChart();
 });
 
-watch(() => props.userdata, (newVal) => {
-  if (newVal) {
-    initChart()
+watch(
+  () => props.userdata,
+  (newVal) => {
+    if (newVal) {
+      initChart();
+    }
   }
-});
+);
 </script>
 
 <style lang="less" scoped>

@@ -1,4 +1,4 @@
-import request from '@/utils/request' // 引入自定义的axios函数
+import request from '@/utils/request'; // 引入自定义的axios函数
 
 /**
  * 添加菜品
@@ -10,8 +10,8 @@ export const addDishAPI = (params: any) => {
     url: '/dish',
     method: 'post',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 获取菜品分页列表
@@ -19,16 +19,16 @@ export const addDishAPI = (params: any) => {
  * @returns
  */
 export const getDishPageListAPI = (params: any) => {
-  console.log('dish-params', params)
+  console.log('dish-params', params);
   return request({
     url: '/dish/page',
     method: 'get',
     params
-  })
-}
+  });
+};
 
 /**
- * 根据id获取菜品信息，用于回显
+ * 根据id获取菜品信息,用于回显
  * @param id 菜品id
  * @returns
  */
@@ -36,8 +36,8 @@ export const getDishByIdAPI = (id: number) => {
   return request({
     url: `/dish/${id}`,
     method: 'get'
-  })
-}
+  });
+};
 
 /**
  * 修改菜品信息
@@ -49,8 +49,8 @@ export const updateDishAPI = (params: any) => {
     url: '/dish',
     method: 'put',
     data: { ...params }
-  })
-}
+  });
+};
 
 /**
  * 修改菜品状态
@@ -58,12 +58,12 @@ export const updateDishAPI = (params: any) => {
  * @returns
  */
 export const updateDishStatusAPI = (id: number) => {
-  console.log('发请求啊！', id)
+  console.log('发请求啊！', id);
   return request({
     url: `/dish/status/${id}`,
     method: 'put'
-  })
-}
+  });
+};
 
 /**
  * 根据ids批量删除菜品
@@ -75,6 +75,5 @@ export const deleteDishesAPI = (ids: string) => {
     url: '/dish',
     method: 'delete',
     params: { ids }
-  })
-}
-
+  });
+};

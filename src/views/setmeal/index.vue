@@ -2,11 +2,24 @@
 import { reactive, ref } from 'vue';
 import { getSetmealPageListAPI, updateSetmealStatusAPI, deleteSetmealsAPI } from '@/api/setmeal';
 import { getCategoryPageListAPI } from '@/api/category';
-import { ElMessage, ElMessageBox, ElTable } from 'element-plus';
+import {
+  ElMessage,
+  ElMessageBox,
+  ElTable,
+  ElPagination,
+  ElTag,
+  ElEmpty,
+  ElButton,
+  ElSelect,
+  ElOption,
+  ElInput,
+  ElCard,
+  ElTableColumn
+} from 'element-plus';
 import { useRouter } from 'vue-router';
 
 // ------ .d.ts 属性类型接口 ------
-// 接收到不在接口中定义的属性的数据，ts会报错，但是类型推断错误不会妨碍接收，控制台还是能打印的
+// 接收到不在接口中定义的属性的数据,ts会报错,但是类型推断错误不会妨碍接收,控制台还是能打印的
 interface setmeal {
   id: number;
   name: string;
@@ -26,7 +39,7 @@ interface Category {
 
 // 当前页的套餐列表
 const setmealList = ref<setmeal[]>([]);
-// 套餐id对应的分类列表，即categoryId字段不能只展示id值，应该根据id查询到对应的分类名进行回显
+// 套餐id对应的分类列表,即categoryId字段不能只展示id值,应该根据id查询到对应的分类名进行回显
 const categoryList = ref<Category[]>([]);
 // 分页参数
 const pageData = reactive({
@@ -66,19 +79,19 @@ const showPageList = async () => {
   setmealList.value = res.data.records;
   total.value = res.data.total;
 };
-init(); // 页面初始化，写在这里时的生命周期是beforecreated/created的时候
+init(); // 页面初始化,写在这里时的生命周期是beforecreated/created的时候
 showPageList(); // 页面一开始就要展示分页套餐列表
 
 // 监听翻页和每页显示数量的变化
 const handleCurrentChange = (val: number) => {
   pageData.page = val;
-  // 根据输入框是否有值/进行了查询，来决定是所有歌曲还是查询后的列表
+  // 根据输入框是否有值/进行了查询,来决定是所有歌曲还是查询后的列表
   showPageList();
 };
 
 const handleSizeChange = (val: number) => {
   pageData.pageSize = val;
-  // 根据输入框是否有值/进行了查询，来决定是所有歌曲还是查询后的列表
+  // 根据输入框是否有值/进行了查询,来决定是所有歌曲还是查询后的列表
   showPageList();
 };
 
@@ -91,10 +104,10 @@ const handleSelectionChange = (val: setmeal[]) => {
   console.log('multiSelection.value', multiSelection.value);
 };
 
-// 新增和修改套餐都是同一个页面，不过要根据路径传参的方式来区分
+// 新增和修改套餐都是同一个页面,不过要根据路径传参的方式来区分
 const router = useRouter();
 const to_add_update = (row?: any) => {
-  console.log('看有没有传过来，来判断要add还是update', row);
+  console.log('看有没有传过来,来判断要add还是update', row);
   if (row && row.id) {
     router.push({
       path: '/setmeal/add',
@@ -110,7 +123,7 @@ const change_btn = async (row: any) => {
   console.log('要修改的行数据');
   console.log(row);
   await updateSetmealStatusAPI(row.id);
-  // 修改后刷新页面，更新数据
+  // 修改后刷新页面,更新数据
   showPageList();
   ElMessage({
     type: 'success',
@@ -122,13 +135,13 @@ const change_btn = async (row: any) => {
 const deleteBatch = (row?: any) => {
   console.log('要删除的行数据');
   console.log(row);
-  ElMessageBox.confirm('该操作会永久删除套餐，是否继续？', 'Warning', {
+  ElMessageBox.confirm('该操作会永久删除套餐,是否继续？', 'Warning', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
     type: 'warning'
   })
     .then(async () => {
-      // 1. 没传入行数据，批量删除
+      // 1. 没传入行数据,批量删除
       if (row == undefined) {
         console.log(multiSelection.value);
         if (multiSelection.value.length == 0) {
@@ -138,7 +151,7 @@ const deleteBatch = (row?: any) => {
           });
           return;
         }
-        // 拿到当前 multiSelection.value 的所有id，然后调用批量删除接口
+        // 拿到当前 multiSelection.value 的所有id,然后调用批量删除接口
         let ids: any = [];
         multiSelection.value.map((item) => {
           ids.push(item.id);
@@ -148,14 +161,14 @@ const deleteBatch = (row?: any) => {
         let res = await deleteSetmealsAPI(ids);
         if (res.data.code != 0) return;
       }
-      // 2. 传入行数据，单个删除
+      // 2. 传入行数据,单个删除
       else {
-        console.log('id包装成数组，然后调用批量删除接口');
+        console.log('id包装成数组,然后调用批量删除接口');
         console.log(row.id);
         let res = await deleteSetmealsAPI(row.id);
         if (res.data.code != 0) return;
       }
-      // 删除后刷新页面，更新数据
+      // 删除后刷新页面,更新数据
       showPageList();
       ElMessage({
         type: 'success',
@@ -209,7 +222,7 @@ const deleteBatch = (row?: any) => {
       <el-table-column prop="categoryId" label="所属分类" width="120px">
         <!-- scope 的父组件是 el-table -->
         <template #default="scope">
-          <!-- 遍历categoryList，找到categoryId对应的name   ?.防止找不到对应关系而报错 -->
+          <!-- 遍历categoryList,找到categoryId对应的name   ?.防止找不到对应关系而报错 -->
           {{ categoryList.find((item) => item.id === scope.row.categoryId)?.name }}
         </template>
       </el-table-column>
@@ -229,7 +242,7 @@ const deleteBatch = (row?: any) => {
     </el-table>
 
     <!-- element ui 官方推荐使用 v-model 双向绑定 而不是使用事件监听 -->
-    <!-- 但是为了监听后还要调用相关函数，看来只能用事件了... -->
+    <!-- 但是为了监听后还要调用相关函数,看来只能用事件了... -->
     <!-- 有没有办法让v-model的值发生改变时自动触发更新函数？ -->
     <el-pagination
       class="page"
@@ -243,59 +256,3 @@ const deleteBatch = (row?: any) => {
       @size-change="handleSizeChange" />
   </el-card>
 </template>
-
-<style lang="less" scoped>
-// element-plus的样式修改
-.el-table {
-  width: 90%;
-  height: 500px;
-  margin: 3rem auto;
-  text-align: center;
-  border: 1px solid #e4e4e4;
-}
-
-:deep(.el-table tr) {
-  font-size: 12px;
-}
-
-.el-button {
-  width: 45px;
-  font-size: 12px;
-}
-
-.el-pagination {
-  justify-content: center;
-}
-
-// 自定义样式
-body {
-  background-color: #c91c1c;
-}
-
-.horizontal {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 80px;
-
-  .input {
-    width: 160px;
-  }
-
-  .btn {
-    width: 120px;
-  }
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-}
-
-.add_btn {
-  width: 100px;
-  height: 40px;
-  margin-left: 900px;
-}
-</style>

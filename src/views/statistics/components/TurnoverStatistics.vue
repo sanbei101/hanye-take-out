@@ -14,13 +14,13 @@ import * as echarts from 'echarts';
 // Define props
 const props = defineProps<{
   turnoverdata: {
-    dateList: string[],
-    turnoverList: number[]
-  }
+    dateList: string[];
+    turnoverList: number[];
+  };
 }>();
 
 // setup 函数中的代码在组件实例创建之前就会执行
-// 因此，如果在 setup 函数中调用函数，那么该函数必须在调用之前被定义
+// 因此,如果在 setup 函数中调用函数,那么该函数必须在调用之前被定义
 
 // Function to initialize the chart
 const initChart = () => {
@@ -30,14 +30,14 @@ const initChart = () => {
 
   const option = {
     tooltip: {
-      trigger: 'axis',
+      trigger: 'axis'
     },
     grid: {
       top: '15%',
       left: '6%',
       right: '10%',
       bottom: '12%',
-      containLabel: true,
+      containLabel: true
     },
     xAxis: {
       type: 'category',
@@ -45,16 +45,16 @@ const initChart = () => {
       axisLabel: {
         textStyle: {
           color: '#666',
-          fontSize: '12px',
-        },
+          fontSize: '12px'
+        }
       },
       axisLine: {
         lineStyle: {
           color: '#E5E4E4',
-          width: 1,
-        },
+          width: 1
+        }
       },
-      data: props.turnoverdata.dateList,
+      data: props.turnoverdata.dateList
     },
     yAxis: {
       type: 'value',
@@ -62,12 +62,12 @@ const initChart = () => {
       axisLabel: {
         textStyle: {
           color: '#666',
-          fontSize: '12px',
-        },
-      },
+          fontSize: '12px'
+        }
+      }
     },
     legend: {
-      // 对指定的data线，设置不同的legend格式
+      // 对指定的data线,设置不同的legend格式
       data: ['营业额（元）'],
       bottom: '4%',
       icon: 'rect',
@@ -89,18 +89,18 @@ const initChart = () => {
           normal: {
             color: '#00ccff',
             lineStyle: {
-              color: '#00ccff',
-            },
+              color: '#00ccff'
+            }
           },
           emphasis: {
             color: '#fff',
             borderWidth: 5,
-            borderColor: '#00ccff',
-          },
+            borderColor: '#00ccff'
+          }
         },
         areaStyle: {
           // opacity: 0.5,
-          // 从上到下渐变，(0,0)是上部，(0,1)是下部
+          // 从上到下渐变,(0,0)是上部,(0,1)是下部
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -112,17 +112,18 @@ const initChart = () => {
             }
           ])
         },
-        data: props.turnoverdata.turnoverList,
-      },
-    ],
+        data: props.turnoverdata.turnoverList
+      }
+    ]
   };
 
   myChart.setOption(option);
 };
 
-
 // Watch for changes in turnoverdata and re-render the chart
-watch(() => props.turnoverdata, (newVal) => {
+watch(
+  () => props.turnoverdata,
+  (newVal) => {
     if (newVal) {
       initChart();
     }
@@ -148,25 +149,25 @@ onMounted(() => {
   justify-content: center;
   margin-top: 10px;
 
-    li {
-        position: relative;
-        padding-left: 10px;
-        /* 留出位置给红线 */
-      }
-    
-      li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        /* 红线垂直居中 */
-        transform: translateY(-50%);
-        /* 红线垂直居中 */
-        width: 5px;
-        /* 红线宽度 */
-        height: 2px;
-        /* 红线高度 */
-        background-color: red;
-      }
+  li {
+    position: relative;
+    padding-left: 10px;
+    /* 留出位置给红线 */
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    /* 红线垂直居中 */
+    transform: translateY(-50%);
+    /* 红线垂直居中 */
+    width: 5px;
+    /* 红线宽度 */
+    height: 2px;
+    /* 红线高度 */
+    background-color: red;
+  }
 }
 </style>

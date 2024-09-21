@@ -51,8 +51,8 @@ const input = ref(''); //搜索条件的订单号
 const phone = ref(''); //搜索条件的手机号
 const rangeTime = ref<[Date, Date]>();
 const dialogVisible = ref(false); //详情弹窗
-const cancelDialogVisible = ref(false); //取消，拒单弹窗
-const cancelDialogTitle = ref(''); //取消，拒绝弹窗标题
+const cancelDialogVisible = ref(false); //取消,拒单弹窗
+const cancelDialogTitle = ref(''); //取消,拒绝弹窗标题
 const cancelReason = ref('');
 const remark = ref(''); //自定义原因
 const counts = ref(0);
@@ -62,18 +62,18 @@ const tableData = ref<Array<any>>([]);
 const diaForm = ref<OrderVO>();
 const isSearch = ref(false);
 const orderStatus = ref(0); //列表字段展示所需订单状态,用于分页请求数据
-const dialogOrderStatus = ref(0); //弹窗所需订单状态，用于详情展示字段
+const dialogOrderStatus = ref(0); //弹窗所需订单状态,用于详情展示字段
 // 拒单原因列表
 const rejectReasonList = reactive([
-  { value: 1, label: '订单量较多，暂时无法接单' },
-  { value: 2, label: '菜品已销售完，暂时无法接单' },
-  { value: 3, label: '餐厅已打烊，暂时无法接单' },
+  { value: 1, label: '订单量较多,暂时无法接单' },
+  { value: 2, label: '菜品已销售完,暂时无法接单' },
+  { value: 3, label: '餐厅已打烊,暂时无法接单' },
   { value: 0, label: '自定义原因' }
 ]);
 // 取消订单原因列表
 const cancelrReasonList = reactive([
-  { value: 1, label: '订单量较多，暂时无法接单' },
-  { value: 2, label: '菜品已销售完，暂时无法接单' },
+  { value: 1, label: '订单量较多,暂时无法接单' },
+  { value: 2, label: '菜品已销售完,暂时无法接单' },
   { value: 3, label: '骑手不足无法配送' },
   { value: 4, label: '客户电话取消' },
   { value: 0, label: '自定义原因' }
@@ -111,7 +111,7 @@ watch(orderStatics, (newValue) => {
 const route = useRoute();
 const router = useRouter();
 
-// 初始化时需要分页查询，展示所有订单
+// 初始化时需要分页查询,展示所有订单
 const init = async (activeIndex: number = 0, search?: boolean) => {
   search && (isSearch.value = search);
   const params = {
@@ -149,7 +149,7 @@ const init = async (activeIndex: number = 0, search?: boolean) => {
   }
 };
 
-// 获取订单统计数据（3种状态的数量），进行红色小圆消息显示
+// 获取订单统计数据（3种状态的数量）,进行红色小圆消息显示
 const getOrderListBy3Status = async () => {
   try {
     const res = await getOrderListByAPI();
@@ -166,9 +166,9 @@ const getOrderListBy3Status = async () => {
   }
 };
 
-// 打开对话框，查看订单详情
+// 打开对话框,查看订单详情
 const goDetail = async (id: any, status: number, row?: any) => {
-  console.log('打开对话框，查看订单详情信息', id, status, row);
+  console.log('打开对话框,查看订单详情信息', id, status, row);
   orderId.value = id;
   try {
     const { data: res } = await queryOrderDetailByIdAPI({ orderId: id });
@@ -314,7 +314,7 @@ const getOrderType = (row: any) => {
   }
 };
 
-// init不够，还得在mounted里面再执行一遍，获取订单统计才行！
+// init不够,还得在mounted里面再执行一遍,获取订单统计才行！
 init(Number(route.query.status) || 0);
 onMounted(async () => {
   if (route.query.status) {
@@ -322,7 +322,7 @@ onMounted(async () => {
   }
   // 获取订单统计数据（3种状态的数量）
   await getOrderListBy3Status();
-  // 如果路径中有orderId值，说明是点击右上角消息通知进来的
+  // 如果路径中有orderId值,说明是点击右上角消息通知进来的
   if (route.query.orderId && route.query.orderId !== 'undefined') {
     goDetail(route.query.orderId, 2);
   }
@@ -595,7 +595,7 @@ onMounted(async () => {
     </template>
   </el-dialog>
 
-  <!-- 点击拒单，弹出 填拒单/取消原因 的弹窗 -->
+  <!-- 点击拒单,弹出 填拒单/取消原因 的弹窗 -->
   <el-dialog
     :title="cancelDialogTitle + '原因'"
     v-model="cancelDialogVisible"

@@ -27,20 +27,20 @@ const rules = {
 const router = useRouter();
 const route = useRoute();
 
-// 修改分类信息后提交（只有管理员才能对其他分类进行修改，否则普通分类只能对自己进行修改）
+// 修改分类信息后提交（只有管理员才能对其他分类进行修改,否则普通分类只能对自己进行修改）
 const submit = async () => {
   try {
     const valid = await updateRef.value.validate();
     if (valid) {
       console.log('submit');
       console.log(form);
-      // 在这里执行表单提交操作，比如调用updateUser(form)方法等
+      // 在这里执行表单提交操作,比如调用updateUser(form)方法等
       const res = await updateCategoryAPI(form);
       if (res.data.code !== 0) {
-        // 响应拦截器已经用ElMessage打印了错误信息，这里直接return
+        // 响应拦截器已经用ElMessage打印了错误信息,这里直接return
         return false;
       }
-      // 然后进行 消息提示，页面跳转 等操作
+      // 然后进行 消息提示,页面跳转 等操作
       ElMessage({
         message: '修改分类信息成功',
         type: 'success'

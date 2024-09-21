@@ -52,9 +52,9 @@ const options = [
 
 // ------ 方法 ------
 
-// 页面初始化，就根据token去获取用户信息，才能实现如果没有token/token过期，刚开始就能够跳转到登录页
+// 页面初始化,就根据token去获取用户信息,才能实现如果没有token/token过期,刚开始就能够跳转到登录页
 const init = async () => {
-  // 参数解构再传进去，不用传total
+  // 参数解构再传进去,不用传total
   const { data: res } = await getCategoryPageListAPI({
     name: pageData.name,
     type: pageData.type,
@@ -68,7 +68,7 @@ const init = async () => {
   pageData.total = res.data.total;
 };
 
-init(); // 页面初始化/分页查询，写在这里时的生命周期是beforecreated/created的时候
+init(); // 页面初始化/分页查询,写在这里时的生命周期是beforecreated/created的时候
 
 // 监听翻页和每页显示数量的变化
 const handleCurrentChange = (val: number) => {
@@ -83,7 +83,7 @@ const handleSizeChange = (val: number) => {
   init();
 };
 
-// 修改分类(路径传参，到update页面后，根据id查询分类信息，回显到表单中)
+// 修改分类(路径传参,到update页面后,根据id查询分类信息,回显到表单中)
 const router = useRouter();
 const update_btn = (row: any) => {
   console.log('要修改的行数据');
@@ -101,7 +101,7 @@ const change_btn = async (row: any) => {
   console.log('要修改的行数据');
   console.log(row);
   await updateCategoryStatusAPI(row.id);
-  // 修改后刷新页面，更新数据
+  // 修改后刷新页面,更新数据
   init();
   ElMessage({
     type: 'success',
@@ -113,7 +113,7 @@ const change_btn = async (row: any) => {
 const delete_btn = (row: any) => {
   console.log('要删除的行数据');
   console.log(row);
-  ElMessageBox.confirm('该操作会永久删除分类，是否继续？', 'Warning', {
+  ElMessageBox.confirm('该操作会永久删除分类,是否继续？', 'Warning', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
     type: 'warning'
@@ -122,7 +122,7 @@ const delete_btn = (row: any) => {
       console.log('要删除的行数据');
       console.log(row);
       await deleteCategoryAPI(row.id);
-      // 删除后刷新页面，更新数据
+      // 删除后刷新页面,更新数据
       init();
       ElMessage({
         type: 'success',
