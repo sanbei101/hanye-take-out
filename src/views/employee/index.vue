@@ -1,7 +1,20 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { getEmployeePageListAPI, updateEmployeeStatusAPI, deleteEmployeeAPI } from '@/api/employee';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import {
+  ElMessage,
+  ElMessageBox,
+  ElTable,
+  ElPagination,
+  ElTag,
+  ElEmpty,
+  ElButton,
+  ElCard,
+  ElTableColumn,
+  ElIcon,
+  ElInput,
+  ElSpace
+} from 'element-plus';
 import { useRouter } from 'vue-router';
 import { useUserInfoStore } from '@/store';
 
@@ -114,13 +127,14 @@ const delete_btn = (row: any) => {
 
 <template>
   <el-card>
-    <div class="horizontal">
+    <el-space :wrap="true">
       <el-input size="large" class="input" v-model="pageData.name" placeholder="请输入想查询的员工名" />
       <el-button size="large" class="btn" round type="success" @click="init()">查询员工</el-button>
       <el-button size="large" class="btn" type="primary" @click="router.push('/employee/add')">
         <el-icon style="font-size: 15px; margin-right: 10px"> <Plus /> </el-icon>添加员工
       </el-button>
-    </div>
+    </el-space>
+
     <el-table :data="employeeList" stripe>
       <!-- <el-table-column prop="id" label="id" /> -->
       <el-table-column prop="name" label="姓名" />
@@ -184,53 +198,3 @@ const delete_btn = (row: any) => {
       @size-change="handleSizeChange" />
   </el-card>
 </template>
-
-<style lang="less" scoped>
-// element-plus的样式修改
-.el-table {
-  width: 90%;
-  height: 500px;
-  margin: 3rem auto;
-  text-align: center;
-  border: 1px solid #e4e4e4;
-}
-
-:deep(.el-table tr) {
-  font-size: 12px;
-}
-
-.el-button {
-  width: 45px;
-  font-size: 12px;
-}
-
-.el-pagination {
-  justify-content: center;
-}
-
-// 自定义样式
-body {
-  background-color: #c91c1c;
-}
-
-.horizontal {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 80px;
-
-  .input {
-    width: 240px;
-  }
-
-  .btn {
-    width: 120px;
-  }
-}
-
-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-}
-</style>
